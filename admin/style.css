@@ -1,0 +1,22 @@
+Nav{
+    color: #fff;
+    background-color: #711E1E;
+}
+#navbarNav ul li a {
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    transition: 3ms;
+}
+#navbarNav ul li a:hover {
+    background-color: #fff;
+    color: #711E1E;
+}
+footer{
+    background-color: #711E1E;
+    color: #fff;
+    padding: 1em 0;
+}

@@ -1,16 +1,8 @@
-<?php include 'productDetails.php';?>
-
 <?php require 'nav.php';?>
-<section class="container-fluid mt-5 align-content-center" style="min-height: 100dvh;">
-    <div class="container align-content-center" style="min-height: 40dvh; background-color: #f5f5f5">
-        <h3 class="text-center p-3">Welcome To VogueVista</h3>   
-        <p class="text-center p-3">Your no.1 online clothing store, where we merge class, style and the streets 🔥  </p>
-    </div>
-</section>
 
 <section class="container" style="min-height: 40dvh;">
     <div class="container align-content-center">
-        <h3 class="text-center p-3">Our Products</h3>
+        <h3 class="text-center p-3">Products view</h3>
     </div>
     <div class="row">
             <?php foreach ($products as $blog) { ?>
@@ -30,4 +22,6 @@
             <?php } ?>
         </div>
 </section>
+
+
 <?php require 'footer.php';?>
