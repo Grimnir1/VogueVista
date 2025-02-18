@@ -1,32 +1,63 @@
-<?php require 'nav.php';?>
 <?php
+    require 'nav.php';
     include("database.php");
     
     $message = '';
 
     $productName = $imageUrl = $description = $price = $type = $category = $stock = $rating = "";
 
+    $errors = [
+        'productName' => '',
+        'imageUrl' => '',
+        'description' => '',
+        'price' => '',
+        'type' => '',
+        'category' => '',
+        'rating' => '',
+        'stock' => '',
+
+    ];
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $productName = $_POST["productName"];
-        $imageUrl = $_POST["imageUrl"];
-        $description = $_POST["description"];
-        $price = $_POST["price"];
-        $type = $_POST["type"];
-        $category = $_POST["category"];
-        $stock = $_POST["stock"];
-        $rating = $_POST["rating"];
+        $productName = mysqli_real_escape_string($conn, $_POST["productName"]);
+        $imageUrl = mysqli_real_escape_string($conn, $_POST["imageUrl"]);
+        $description = mysqli_real_escape_string($conn, $_POST["description"]);
+        $price = mysqli_real_escape_string($conn, $_POST["price"]);
+        $type = mysqli_real_escape_string($conn, $_POST["type"]);
+        $category = mysqli_real_escape_string($conn, $_POST["category"]);
+        $stock = mysqli_real_escape_string($conn, $_POST["stock"]);
+        $rating = mysqli_real_escape_string($conn, $_POST["rating"]);
 
         $sql = "INSERT INTO `producttable` (`productName`, `imageUrl`, `description`, `price`, `type`, `category`, `stock`, `rating`) VALUES ('$productName', '$imageUrl', '$description', '$price', '$type', '$category', '$stock', '$rating')";
-        if (empty($productName) || empty($imageUrl) || empty($description) || empty($price) || empty($type) || empty($category) || empty($stock) || empty($rating)) {
-            echo "<script>alert('Please fill all fields');</script>";
-        } else{
-        if (mysqli_query($conn, $sql)) {
-            echo "<script>alert('Product added successfully!');</script>";
-            $productName = $imageUrl = $description = $price = $type = $category = $stock = $rating = "";
-        } else {
-            echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
-        }
-    }
+        if (empty($productName)) {
+            $errors['productName']= "This field is empty";
+        }elseif(empty($imageUrl)){
+            $errors['imageUrl']= "This field is empty";
+        }elseif(empty($description)){
+            $errors['description']= "This field is empty";
+        }elseif(empty($price)){
+            $errors['price']= "This field is empty";
+        }elseif(empty($type)){
+            $errors['type']= "This field is empty";
+        }elseif(empty($category)){
+            $errors['category']= "This field is empty";
+        }elseif(empty($stock)){
+            $errors['stock']= "This field is empty";
+        }elseif(empty($rating)){
+            $errors['rating']= "This field is empty";
+        }else{
+            if (mysqli_query($conn, $sql)) {
+                echo '
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> Post saved successfully
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    ';
+                $productName = $imageUrl = $description = $price = $type = $category = $stock = $rating = "";
+            } else {
+                echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
+            }
+        }    
     }
 ?>
     <div class="container border bg-light p-5 shadow-sm rounded col-md-5 mt-5 my-5">
@@ -39,27 +70,37 @@
                 class="form-control mt-3" 
                 value="<?php echo htmlspecialchars($productName)?>"
             >
+            <small class="text-danger"><?php echo $errors['productName']; ?></small>
+
             <input 
                 type="url" 
                 placeholder="imageURl" 
                 name="imageUrl" 
                 class="form-control mt-3" 
                 value="<?php echo htmlspecialchars($imageUrl)?>"
+
             >
+            <small class="text-danger"><?php echo $errors['imageUrl']; ?></small>
+
             <input 
                 type="text" 
                 placeholder="Description" 
                 name="description" 
                 class="form-control mt-3" 
                 value="<?php echo htmlspecialchars($description)?>"
+
             >
+            <small class="text-danger"><?php echo $errors['description']; ?></small>
             <input 
                 type="decimal" 
                 placeholder="Price" 
                 name="price" 
                 class="form-control mt-3" 
                 value="<?php echo htmlspecialchars($price)?>"
+
             >
+            <small class="text-danger"><?php echo $errors['price']; ?></small>
+
             <input 
                 type="text" 
                 placeholder="Type" 
@@ -67,36 +108,45 @@
                 class="form-control mt-3" 
                 value="<?php echo htmlspecialchars($type)?>"
             >
+            <small class="text-danger"><?php echo $errors['type']; ?></small>
 
             <select 
                 name="category" 
                 id="" 
                 class="form-select mt-3"
+
             >
                 <option value="">Select Category</option>
                 <option value="women">Women</option>
                 <option value="men">Men</option>
                 <option value="unisex">Unisex</option>
             </select>
+            <small class="text-danger"><?php echo $errors['category']; ?></small>
 
             <input 
                 type="number" 
                 placeholder="Stock Remaining" 
                 name="stock" 
                 class="form-control mt-3" 
-                value="<?php echo htmlspecialchars($type)?>"
+                value="<?php echo htmlspecialchars($stock)?>"
+
             >
+            <small class="text-danger"><?php echo $errors['stock']; ?></small>
+
             <input 
                 type="decimal" 
                 placeholder="Rating" 
                 name="rating" 
                 class="form-control mt-3" 
                 value="<?php echo htmlspecialchars($rating)?>"
+
             >
+            <small class="text-danger"><?php echo $errors['rating']; ?></small>
             <button type="submit" class="btn btn-primary mt-3 ms-auto">Add Product</button>
 
         </form>
     </div>
 
     <?php require 'footer.php';?>
+    
 

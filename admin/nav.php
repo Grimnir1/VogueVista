@@ -21,13 +21,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="productView.php">View Products</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="enterProductDetails.php">Add Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Add Product</a>
                         </li>
                     </ul>
                 </div>

@@ -1,5 +1,6 @@
 <?php
     $userName = $password = '';
+
    
 ?>
 <!DOCTYPE html>
@@ -24,6 +25,7 @@
                         name="userName" 
                         class="form-control mt-3" 
                         value="<?php echo htmlspecialchars($userName)?>"
+                        required
                     >
                     <input 
                         type="password" 
@@ -31,10 +33,11 @@
                         name="password" 
                         class="form-control mt-3" 
                         value="<?php echo htmlspecialchars($password)?>"
+                        required
                     >
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="mt-5">
-                            <a class="mt-3">Create an account</a>
+                            <a href="signup.php" class="mt-3">Create an account</a>
                         </div>
                         <div class=" ms-auto align-self-end">
                             <button type="submit" class="btn btn-primary mt-3 ms-auto">Login</button>
