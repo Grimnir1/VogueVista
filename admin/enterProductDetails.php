@@ -47,21 +47,27 @@
             $errors['rating']= "This field is empty";
         }else{
             if (mysqli_query($conn, $sql)) {
-                echo '
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Success!</strong> Post saved successfully
+                $message ='
+                    <div class="alert alert-success text-center alert-dismissible fade show" role="alert">
+                        Product added successfully
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     ';
                 $productName = $imageUrl = $description = $price = $type = $category = $stock = $rating = "";
             } else {
-                echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
+                $message ='
+                    <div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
+                        Failed to add product 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    ';
             }
         }    
     }
 ?>
     <div class="container border bg-light p-5 shadow-sm rounded col-md-5 mt-5 my-5">
         <form action="" method="post">
+            <?php echo $message; ?>
             <h3 align="center">Add a Product</h3>
             <input 
                 type="text" 
