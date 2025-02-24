@@ -4,11 +4,10 @@
     
     $message = '';
 
-    $productName = $imageUrl = $description = $price = $type = $category = $stock = $rating = "";
+    $productName = $description = $price = $type = $category = $stock = $rating = "";
 
     $errors = [
         'productName' => '',
-        'imageUrl' => '',
         'description' => '',
         'price' => '',
         'type' => '',
@@ -20,19 +19,24 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $productName = mysqli_real_escape_string($conn, $_POST["productName"]);
-        $imageUrl = mysqli_real_escape_string($conn, $_POST["imageUrl"]);
         $description = mysqli_real_escape_string($conn, $_POST["description"]);
         $price = mysqli_real_escape_string($conn, $_POST["price"]);
         $type = mysqli_real_escape_string($conn, $_POST["type"]);
         $category = mysqli_real_escape_string($conn, $_POST["category"]);
         $stock = mysqli_real_escape_string($conn, $_POST["stock"]);
         $rating = mysqli_real_escape_string($conn, $_POST["rating"]);
+        $target_dir = "uploads/";
+        $image = $_FILES['image'];
+        $imageName = $image["name"];
+        $tempName = $image["tmp_name"];
+        $imageSize = $image["size"];
+        $imageError = $image["error"];
+        $imageExt = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
+        $allowed =['jpg', 'jpeg', 'png', 'svg'];
 
-        $sql = "INSERT INTO `producttable` (`productName`, `imageUrl`, `description`, `price`, `type`, `category`, `stock`, `rating`) VALUES ('$productName', '$imageUrl', '$description', '$price', '$type', '$category', '$stock', '$rating')";
+       
         if (empty($productName)) {
             $errors['productName']= "This field is empty";
-        }elseif(empty($imageUrl)){
-            $errors['imageUrl']= "This field is empty";
         }elseif(empty($description)){
             $errors['description']= "This field is empty";
         }elseif(empty($price)){
@@ -46,27 +50,52 @@
         }elseif(empty($rating)){
             $errors['rating']= "This field is empty";
         }else{
-            if (mysqli_query($conn, $sql)) {
-                $message ='
-                    <div class="alert alert-success text-center alert-dismissible fade show" role="alert">
-                        Product added successfully
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    ';
-                $productName = $imageUrl = $description = $price = $type = $category = $stock = $rating = "";
-            } else {
-                $message ='
-                    <div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
-                        Failed to add product 
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    ';
-            }
-        }    
+            
+            if ($imageError === 0) {
+                if (in_array($imageExt, $allowed)) {
+                    $newImageName = time() . "." . $imageExt;
+                    $target_image = $target_dir . $newImageName;
+                    if(move_uploaded_file($tempName, $target_image)) {
+                        $imageUrl = $target_image;
+                        $sql = "INSERT INTO `producttable` (`productName`, `imageUrl`, `description`, `price`, `type`, `category`, `stock`, `rating`) VALUES ('$productName', '$imageUrl', '$description', '$price', '$type', '$category', '$stock', '$rating')";
+                        if (mysqli_query($conn, $sql)) {
+                            $message ='
+                                <div class="alert alert-success text-center alert-dismissible fade show" role="alert">
+                                    Product added successfully
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                ';
+                            $productName = $description = $price = $type = $category = $stock = $rating = "";
+                        } else {
+                            $message ='
+                                <div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
+                                    Failed to add product 
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                ';
+                        }
+            }    
+
+                }else {
+                    $alert = '<div class="alert alert-danger text-center alert-dismissible fade show" role="alert">
+                                Invalid file path
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>';
+                }
+            }else{
+                $message = '<div class="alert alert-danger text-center alert-dismissible fade show" role="alert">
+                                Error Uploading Image
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>';
+            };
+
+                    
     }
+};
+
 ?>
     <div class="container border bg-light p-5 shadow-sm rounded col-md-5 mt-5 my-5">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <?php echo $message; ?>
             <h3 align="center">Add a Product</h3>
             <input 
@@ -77,16 +106,6 @@
                 value="<?php echo htmlspecialchars($productName)?>"
             >
             <small class="text-danger"><?php echo $errors['productName']; ?></small>
-
-            <input 
-                type="url" 
-                placeholder="imageURl" 
-                name="imageUrl" 
-                class="form-control mt-3" 
-                value="<?php echo htmlspecialchars($imageUrl)?>"
-
-            >
-            <small class="text-danger"><?php echo $errors['imageUrl']; ?></small>
 
             <input 
                 type="text" 
@@ -126,6 +145,8 @@
                 <option value="women">Women</option>
                 <option value="men">Men</option>
                 <option value="unisex">Unisex</option>
+                <option value="accessories">Accessories</option>
+                <option value="footwear">Footwear</option>
             </select>
             <small class="text-danger"><?php echo $errors['category']; ?></small>
 
@@ -145,6 +166,12 @@
                 name="rating" 
                 class="form-control mt-3" 
                 value="<?php echo htmlspecialchars($rating)?>"
+
+            >
+            <input 
+                type="file"
+                name="image" 
+                class="form-control mt-3"
 
             >
             <small class="text-danger"><?php echo $errors['rating']; ?></small>

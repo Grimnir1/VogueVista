@@ -56,7 +56,7 @@
                                 </div>';
             
         }else{
-                $sql =" INSERT INTO `adminusers` (`firstname`, `lastname`, `email`, `password`, `confirmPassword`) VALUE ('$firstName', '$lastName', '$email', '$password', '$confirmPassword')";
+                $sql =" INSERT INTO `users` (`firstname`, `lastname`, `email`, `password`, `confirmPassword`) VALUE ('$firstName', '$lastName', '$email', '$password', '$confirmPassword')";
 
                 $query = mysqli_query($conn, $sql);
 

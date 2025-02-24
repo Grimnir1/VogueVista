@@ -1,4 +1,4 @@
-<footer class="container-fluid bg-secondary mt-5" style="min-height: 30dvh;">
+<footer class="container-fluid bg-secondary" style="min-height: 30dvh;">
 <div class="container text-white p-5">
             <div class="row g-4">
                 <div class="col-md-4">

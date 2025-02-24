@@ -1,268 +1,106 @@
-<?php
-    $products = [
-        [
-            'id' => 1,
-            'name' => 'Classic Denim Jacket',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/97/8815363/1.jpg?6449',
-            'description' => 'Vintage-style blue denim jacket with brass buttons',
-            'price' => 89.99,
-            'type' => 'Outerwear',
-            'category' => 'Men',
-            'stock' => 75,
-            'rating' => 4.7
-        ],
-        [
-            'id' => 2,
-            'name' => 'Floral Summer Dress',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/10/8334331/1.jpg?2734',
-            'description' => 'Light cotton dress with floral print and ruffle details',
-            'price' => 59.99,
-            'type' => 'Dresses',
-            'category' => 'Women',
-            'stock' => 100,
-            'rating' => 4.5
-        ],
-        [
-            'id' => 3,
-            'name' => 'Slim Fit Chinos',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/0025752/1.jpg?4236',
-            'description' => 'Casual cotton chino pants in blue color',
-            'price' => 45.99,
-            'type' => 'Pants',
-            'category' => 'Men',
-            'stock' => 120,
-            'rating' => 4.6
-        ],
-        [
-            'id' => 4,
-            'name' => 'High-Waist Yoga Leggings',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/30/1244113/1.jpg?8958',
-            'description' => 'Moisture-wicking stretch leggings with pocket',
-            'price' => 34.99,
-            'type' => 'Activewear',
-            'category' => 'Women',
-            'stock' => 150,
-            'rating' => 4.8
-        ],
-        [
-            'id' => 5,
-            'name' => 'Cotton Crew Neck T-Shirt',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/04/6437962/1.jpg?4633',
-            'description' => 'Basic crew neck tee in premium cotton',
-            'price' => 19.99,
-            'type' => 'T-Shirts',
-            'category' => 'Unisex',
-            'stock' => 200,
-            'rating' => 4.4
-        ],
-        [
-            'id' => 6,
-            'name' => 'Wool Peacoat',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/42/3056392/1.jpg?3254',
-            'description' => 'Classic double-breasted peacoat in charcoal grey',
-            'price' => 149.99,
-            'type' => 'Outerwear',
-            'category' => 'Men',
-            'stock' => 45,
-            'rating' => 4.7
-        ],
-        [
-            'id' => 7,
-            'name' => 'Pleated Midi Skirt',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/68/4854022/1.jpg?0619',
-            'description' => 'Elegant pleated skirt in solid navy blue',
-            'price' => 49.99,
-            'type' => 'Skirts',
-            'category' => 'Women',
-            'stock' => 80,
-            'rating' => 4.5
-        ],
-        [
-            'id' => 8,
-            'name' => 'Hooded Sweatshirt',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/28/602627/1.jpg?2146',
-            'description' => 'Comfortable cotton blend hoodie with kangaroo pocket',
-            'price' => 39.99,
-            'type' => 'Sweatshirts',
-            'category' => 'Unisex',
-            'stock' => 160,
-            'rating' => 4.6
-        ],
-        [
-            'id' => 9,
-            'name' => 'Silk Blouse',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/66/5142342/1.jpg?5113',
-            'description' => 'Luxurious silk blouse with button-up front',
-            'price' => 89.99,
-            'type' => 'Tops',
-            'category' => 'Women',
-            'stock' => 60,
-            'rating' => 4.4
-        ],
-        [
-            'id' => 10,
-            'name' => 'Dress Shirt',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/81/9288183/1.jpg?8788',
-            'description' => 'Business dress shirt in wrinkle-resistant cotton',
-            'price' => 54.99,
-            'type' => 'Shirts',
-            'category' => 'Men',
-            'stock' => 90,
-            'rating' => 4.5
-        ],
-        [
-            'id' => 11,
-            'name' => 'Cargo Shorts',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/18/1633993/1.jpg?8627',
-            'description' => 'Casual cotton cargo shorts with multiple pockets',
-            'price' => 29.99,
-            'type' => 'Shorts',
-            'category' => 'Men',
-            'stock' => 110,
-            'rating' => 4.3
-        ],
-        [
-            'id' => 12,
-            'name' => 'Knit Sweater',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/79/8804591/1.jpg?7573',
-            'description' => 'Cozy cable knit sweater in blue color',
-            'price' => 69.99,
-            'type' => 'Sweaters',
-            'category' => 'Unisex',
-            'stock' => 70,
-            'rating' => 4.6
-        ],
-        [
-            'id' => 13,
-            'name' => 'Maxi Sundress',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/19/6843043/1.jpg?4163',
-            'description' => 'Flowing maxi dress with side slits',
-            'price' => 79.99,
-            'type' => 'Dresses',
-            'category' => 'Women',
-            'stock' => 85,
-            'rating' => 4.7
-        ],
-        [
-            'id' => 14,
-            'name' => 'Athletic Performance Shorts',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/90/7515863/1.jpg?8488',
-            'description' => 'Quick-dry running shorts with built-in liner',
-            'price' => 32.99,
-            'type' => 'Activewear',
-            'category' => 'Unisex',
-            'stock' => 130,
-            'rating' => 4.5
-        ],
-        [
-            'id' => 15,
-            'name' => 'Leather Bomber Jacket',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/79/2769961/1.jpg?1624',
-            'description' => 'Classic leather bomber jacket with quilted lining',
-            'price' => 199.99,
-            'type' => 'Outerwear',
-            'category' => 'Men',
-            'stock' => 40,
-            'rating' => 4.8
-        ],
-        [
-            'id' => 16,
-            'name' => 'V-Neck Cardigan',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/61/2910383/1.jpg?3483',
-            'description' => 'Soft cotton blend cardigan with button front',
-            'price' => 44.99,
-            'type' => 'Sweaters',
-            'category' => 'Women',
-            'stock' => 95,
-            'rating' => 4.4
-        ],
-        [
-            'id' => 17,
-            'name' => 'Linen Button-Down Shirt',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/34/1552082/1.jpg?2169',
-            'description' => 'Casual linen shirt perfect for summer',
-            'price' => 49.99,
-            'type' => 'Shirts',
-            'category' => 'Men',
-            'stock' => 75,
-            'rating' => 4.5
-        ],
-        [
-            'id' => 18,
-            'name' => 'Wrap Jumpsuit',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/59/5504643/1.jpg?0720',
-            'description' => 'Elegant wrap-style jumpsuit in black',
-            'price' => 84.99,
-            'type' => 'Jumpsuits',
-            'category' => 'Women',
-            'stock' => 55,
-            'rating' => 4.6
-        ],
-        [
-            'id' => 19,
-            'name' => 'Rain Jacket',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/02/989816/1.jpg?9773',
-            'description' => 'Waterproof jacket with hood and sealed seams',
-            'price' => 79.99,
-            'type' => 'Outerwear',
-            'category' => 'Unisex',
-            'stock' => 65,
-            'rating' => 4.7
-        ],
-        [
-            'id' => 20,
-            'name' => 'Straight Leg Jeans',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/00/415324/1.jpg?6187',
-            'description' => 'Classic straight leg jeans in dark wash',
-            'price' => 59.99,
-            'type' => 'Jeans',
-            'category' => 'Men',
-            'stock' => 140,
-            'rating' => 4.5
-        ],
-        [
-            'id' => 21,
-            'name' => 'Tennis Skirt',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/31/2502542/1.jpg?2279',
-            'description' => 'Athletic skirt with built-in shorts',
-            'price' => 39.99,
-            'type' => 'Activewear',
-            'category' => 'Women',
-            'stock' => 70,
-            'rating' => 4.4
-        ],
-        [
-            'id' => 22,
-            'name' => 'Polo Shirt',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/42/351699/1.jpg?6464',
-            'description' => 'Classic fit polo in breathable pique cotton',
-            'price' => 34.99,
-            'type' => 'Shirts',
-            'category' => 'Unisex',
-            'stock' => 120,
-            'rating' => 4.3
-        ],
-        [
-            'id' => 23,
-            'name' => 'Pencil Skirt',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/22/100546/1.jpg?1305',
-            'description' => 'Professional pencil skirt with back vent',
-            'price' => 49.99,
-            'type' => 'Skirts',
-            'category' => 'Women',
-            'stock' => 60,
-            'rating' => 4.6
-        ],
-        [
-            'id' => 24,
-            'name' => 'Fleece Pullover',
-            'image' => 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/56/5113452/1.jpg?1504',
-            'description' => 'Warm fleece pullover with quarter zip',
-            'price' => 44.99,
-            'type' => 'Sweatshirts',
-            'category' => 'Unisex',
-            'stock' => 85,
-            'rating' => 4.5
-        ],
-    ];
+<?php 
+    require 'nav.php';
+    require 'database.php';
+
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $sql = "SELECT * FROM producttable WHERE productId = $id";
+        $query = mysqli_query($conn, $sql);
+        $product = mysqli_fetch_assoc($query);
+    }  
 ?>
+
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="http://localhost/VogueVista/" class="text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item"><a href="products.php" class="text-decoration-none">Products</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><?php echo $product['productName']; ?></li>
+            </ol>
+        </nav>
+
+        <div class="row g-5">
+            <!-- Product Image Column -->
+            <div class="col-md-6">
+                <div class="position-relative">
+                    <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                        <img src="../admin/<?php echo $product['imageUrl']; ?>" 
+                             class="img-fluid" 
+                             style="height: 500px; object-fit: cover;" 
+                             alt="<?php echo $product['productName']; ?>">
+                    </div>
+                    <?php if($product['stock'] < 10): ?>
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-warning">Low Stock</span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Product Details Column -->
+            <div class="col-md-6">
+                <div class="card border-0 shadow-lg rounded-4 p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h2 class="fw-bold mb-2"><?php echo $product['productName']; ?></h2>
+                            <span class="badge bg-primary"><?php echo $product['type']; ?></span>
+                        </div>
+                        <div class="text-end">
+                            <h3 class="text-primary mb-0">$<?php echo number_format($product['price'], 2); ?></h3>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="me-3">
+                                <?php
+                                    $rating = $product['rating'];
+                                    for($i = 1; $i <= 5; $i++) {
+                                        if($i <= $rating) {
+                                            echo '<i class="bi bi-star-fill text-warning"></i>';
+                                        } else {
+                                            echo '<i class="bi bi-star text-warning"></i>';
+                                        }
+                                    }
+                                ?>
+                            </div>
+                            <span class="text-muted"><?php echo $rating; ?> out of 5</span>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="fw-bold mb-3">Description</h5>
+                            <p class="text-muted"><?php echo $product['description']; ?></p>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="me-4">
+                                <span class="text-muted">Stock Status:</span>
+                                <span class="fw-bold ms-2"><?php echo $product['stock']; ?> units</span>
+                            </div>
+                            <div class="vr"></div>
+                            <div class="ms-4">
+                                <span class="text-muted">Product ID:</span>
+                                <span class="fw-bold ms-2">#<?php echo str_pad($id, 5, '0', STR_PAD_LEFT); ?></span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-primary flex-grow-1">
+                                <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                            </button>
+                            <button class="btn btn-outline-primary">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                            <button class="btn btn-danger">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php require 'footer.php';?> 

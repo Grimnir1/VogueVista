@@ -15,8 +15,8 @@
             <?php foreach ($products as $product) { ?>
                 <div class="blog-card mt-5 col-md-4 align-content-center" style="min-height: 50dvh;">
                     <div class="card m-auto border shadow" style="width: 70%;">
-                        <div class="d-flex joj justify-content-center">
-                            <img src="<?php echo $product['imageUrl']; ?>" class="card-img-top productImage" alt="...">
+                        <div style="width: 100%;">
+                            <img src="<?php echo $product['imageUrl']; ?>" style="width: 100%; object-fit: cover;"  alt="...">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title p-2"><?php echo $product['productName']; ?></h5>
@@ -24,6 +24,7 @@
                             <p class="card-text p-2 mb-1"><?php echo $product['description'] ?></p>
                             <small class="fw-medium p-2 mb-4">Stock: <?php echo $product['stock'] ?>| Rating: <?php echo $product['rating'] ?>|Price :$<?php echo $product['price'] ?></small>
                             <button class="btn btn-danger border-0 ms-auto">Edit</button>
+                            <button class="btn btn-danger border-0 ms-auto">Delete</button>
                         </div>
                     </div>
                 </div>
