@@ -6,9 +6,16 @@
     , initial-scale=1.0">
     <title>Vogue admin</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+    <style>
+        a{
+            text-decoration: none;
+            color: black;
+        }   
+    </style>
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
@@ -27,7 +34,7 @@
                             <a class="nav-link" href="enterProductDetails.php">Add Product</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Logout</a>
+                            <a class="nav-link" href="index.php">Logout</a>
                         </li>
                     </ul>
                 </div>

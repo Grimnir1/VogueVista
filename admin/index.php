@@ -26,14 +26,15 @@
             $query = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($query) > 0) {
-            $request = mysqli_fetch_assoc($query);
-            
-            $loginpword = $request['password'];
+                $request = mysqli_fetch_assoc($query);
+                $loginpword = $request['password'];
+                $hash_password = password_hash($password, PASSWORD_DEFAULT);
 
-                if ($password == $loginpword) {
+
+                if (password_verify($password, $loginpword)) {
+                    // session_start();
                     header('Location: productView.php');
                     exit();
-                    $email = $password = '';    
                 }else {
                     $error = '
                 <div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
@@ -98,5 +99,8 @@
             </div>
         </div>
     </section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -43,6 +43,13 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>';
             
+        }elseif(strlen($password) < 8){
+            $errors ='
+                <div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
+                                    Password is too short
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+            ';
         }elseif (empty($confirmPassword)) {
             $errors = '<div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
                                     Please Enter your confirmPassword 
@@ -56,14 +63,31 @@
                                 </div>';
             
         }else{
-                $sql =" INSERT INTO `adminusers` (`firstname`, `lastname`, `email`, `password`, `confirmPassword`) VALUE ('$firstName', '$lastName', '$email', '$password', '$confirmPassword')";
+            $sql = "SELECT * FROM adminusers WHERE email = '$email'";
+            $query = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($query) > 0) {
+                $errors = '<div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
+                                    Email already exists 
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>';
+            }else{
+
+                $hash_password = password_hash($password, PASSWORD_DEFAULT);
+                $sql =" INSERT INTO `adminusers` (`firstname`, `lastname`, `email`, `password`) VALUE ('$firstName', '$lastName', '$email', '$hash_password')";
 
                 $query = mysqli_query($conn, $sql);
 
                 if ($query) {
                     header('Location: index.php');
                     exit();
+                }else{
+                    $errors = '<div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
+                                    Error Occured 
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>';
                 }
+            }
 
         };
     };

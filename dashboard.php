@@ -5,20 +5,18 @@ require 'database.php';
 $sql = 'SELECT * FROM producttable';
 $query = mysqli_query($conn, $sql);
 $products = mysqli_fetch_all($query, MYSQLI_ASSOC); 
+
 ?>
 
-<!-- Hero Section -->
-<section class="container-fluid  py-5">
-    <div style="min-height: 50dvh" class="container align-content-center text-center">
+<section class="container-fluid  py-5" style=" background-image:url(premium_photo-1681488262364-8aeb1b6aac56.avif); background-repeat:no-repeat; background-size:cover; color:#711E1E; ">
+    <div style="min-height: 50dvh;" class="container blur align-content-center text-center">
         <h3 class="mb-3">Welcome To VogueVista</h3>   
         <p>Your No.1 destination for trendy and stylish fashion.</p>
     </div>
 </section>
 
-<!-- Products Section -->
 <section id="products" class="py-5">
     <div class="container ">
-        <!-- Section Header -->
         <div class="row mb-5">
             <div class="col-lg-6 mx-auto text-center">
                 <h2 class="fw-bold mb-4">Our Products</h2>
@@ -26,7 +24,6 @@ $products = mysqli_fetch_all($query, MYSQLI_ASSOC);
             </div>
         </div>
 
-        <!-- Product Categories -->
         <?php
         $categories = ['men' => 'Male fashion', 'women' => 'Female fashion', 
                       'footwear' => 'Footwear', 'accessories' => 'Accessories'];
@@ -37,7 +34,7 @@ $products = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <div class="border-bottom border-2 mb-4" style="border-color: #711E1E !important;">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="fw-bold"><?php echo $title; ?></h4>
-                        <a href="<?php echo strtolower(str_replace(' ', '', $title)); ?>.php">
+                        <a href="<?php echo str_replace(' ', '', $title); ?>.php">
                             See More<i class="bi bi-arrow-right-short"></i>
                         </a>
                     </div>
@@ -62,7 +59,7 @@ $products = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                             
                                             <div class="position-absolute bottom-0 end-0 m-3 px-3 py-2 rounded-pill text-white"
                                                  style="background-color: #711E1E;">
-                                                $<?php echo number_format($product['price'], 2); ?>
+                                                $<?php echo $product['price']; ?>
                                             </div>
                                         </div>
                                         

@@ -30,7 +30,7 @@
             
             $loginpword = $request['password'];
 
-                if ($password == $loginpword) {
+                if (password_verify($password, $loginpword)) {
                     header('Location: dashboard.php');
                     exit();
                     $email = $password = '';    
@@ -68,7 +68,7 @@
     <section class="container-fluid align-content-center " style="min-height: 100vh;">
         <div class="container col-md-4 border bg-light p-5 shadow-lg rounded mt-5">
             <?php echo $error?>
-            <h2 class="text-center">VogueVista Admin Panel</h2>
+            <h2 class="text-center">Welcome to VogueVista</h2>
             <div>
                 <form action="" method="POST">
                     <input 
