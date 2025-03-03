@@ -1,3 +1,10 @@
+<?php require 'sessionstart.php';?>
+<?php
+
+    $id = $_SESSION['user'] ?? null;
+    // echo $_SESSION['user'];
+    // echo $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,6 +54,9 @@
                         </li>
                         <li class="nav-item">
                         <a class="nav-link" href="contact.php">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/VogueVista/<?php echo $id ? 'logout.php': 'login.php'  ?>"><?php echo $id ? 'logout': 'login'  ?></a>
                         </li>
                     </ul>
                 </div>

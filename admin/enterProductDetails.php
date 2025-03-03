@@ -56,8 +56,9 @@
                     $newImageName = time() . "." . $imageExt;
                     $target_image = $target_dir . $newImageName;
                     if(move_uploaded_file($tempName, $target_image)) {
+                        $addedBy = $_SESSION['user'];
                         $imageUrl = $target_image;
-                        $sql = "INSERT INTO `producttable` (`productName`, `imageUrl`, `description`, `price`, `type`, `category`, `stock`, `rating`) VALUES ('$productName', '$imageUrl', '$description', '$price', '$type', '$category', '$stock', '$rating')";
+                        $sql = "INSERT INTO `producttable` (`productName`, `imageUrl`, `description`, `price`, `type`, `category`, `stock`, `rating`, `addedBy`) VALUES ('$productName', '$imageUrl', '$description', '$price', '$type', '$category', '$stock', '$rating', '$addedBy')";
                         if (mysqli_query($conn, $sql)) {
                             $message ='
                                 <div class="alert alert-success text-center alert-dismissible fade show" role="alert">
@@ -94,91 +95,191 @@
 };
 
 ?>
-    <div class="container border bg-light p-5 shadow-sm rounded col-md-5 mt-5 my-5">
-        <form action="" method="post" enctype="multipart/form-data">
-            <?php echo $message; ?>
-            <h3 align="center">Add a Product</h3>
-            <input 
-                type="text" 
-                placeholder="Product Name" 
-                name="productName" 
-                class="form-control mt-3" 
-                value="<?php echo htmlspecialchars($productName)?>"
-            >
-            <small class="text-danger"><?php echo $errors['productName']; ?></small>
+    <?php if($adminStatus == null){ ?>
+        <div class="container border bg-light p-5 shadow-sm rounded col-md-5 mt-5 my-5">
+            <form action="" method="post" enctype="multipart/form-data">
+                <?php echo $message; ?>
+                <h3 align="center">Add a Product</h3>
+                <input 
+                    type="text" 
+                    placeholder="Product Name" 
+                    name="productName" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($productName)?>"
+                >
+                <small class="text-danger"><?php echo $errors['productName']; ?></small>
 
-            <input 
-                type="text" 
-                placeholder="Description" 
-                name="description" 
-                class="form-control mt-3" 
-                value="<?php echo htmlspecialchars($description)?>"
+                <input 
+                    type="text" 
+                    placeholder="Description" 
+                    name="description" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($description)?>"
 
-            >
-            <small class="text-danger"><?php echo $errors['description']; ?></small>
-            <input 
-                type="decimal" 
-                placeholder="Price" 
-                name="price" 
-                class="form-control mt-3" 
-                value="<?php echo htmlspecialchars($price)?>"
+                >
+                <small class="text-danger"><?php echo $errors['description']; ?></small>
+                <input 
+                    type="decimal" 
+                    placeholder="Price" 
+                    name="price" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($price)?>"
 
-            >
-            <small class="text-danger"><?php echo $errors['price']; ?></small>
+                >
+                <small class="text-danger"><?php echo $errors['price']; ?></small>
 
-            <input 
-                type="text" 
-                placeholder="Type" 
-                name="type" 
-                class="form-control mt-3" 
-                value="<?php echo htmlspecialchars($type)?>"
-            >
-            <small class="text-danger"><?php echo $errors['type']; ?></small>
+                <input 
+                    type="text" 
+                    placeholder="Type" 
+                    name="type" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($type)?>"
+                >
+                <small class="text-danger"><?php echo $errors['type']; ?></small>
 
-            <select 
-                name="category" 
-                id="" 
-                class="form-select mt-3"
+                <select 
+                    name="category" 
+                    id="" 
+                    class="form-select mt-3"
 
-            >
-                <option value="">Select Category</option>
-                <option value="women">Women</option>
-                <option value="men">Men</option>
-                <option value="unisex">Unisex</option>
-                <option value="accessories">Accessories</option>
-                <option value="footwear">Footwear</option>
-            </select>
-            <small class="text-danger"><?php echo $errors['category']; ?></small>
+                >
+                    <option value="">Select Category</option>
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                    <option value="unisex">Unisex</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="footwear">Footwear</option>
+                </select>
+                <small class="text-danger"><?php echo $errors['category']; ?></small>
 
-            <input 
-                type="number" 
-                placeholder="Stock Remaining" 
-                name="stock" 
-                class="form-control mt-3" 
-                value="<?php echo htmlspecialchars($stock)?>"
+                <input 
+                    type="number" 
+                    placeholder="Stock Remaining" 
+                    name="stock" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($stock)?>"
 
-            >
-            <small class="text-danger"><?php echo $errors['stock']; ?></small>
+                >
+                <small class="text-danger"><?php echo $errors['stock']; ?></small>
 
-            <input 
-                type="decimal" 
-                placeholder="Rating" 
-                name="rating" 
-                class="form-control mt-3" 
-                value="<?php echo htmlspecialchars($rating)?>"
+                <input 
+                    type="decimal" 
+                    placeholder="Rating" 
+                    name="rating" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($rating)?>"
 
-            >
-            <input 
-                type="file"
-                name="image" 
-                class="form-control mt-3"
+                >
+                <input 
+                    type="file"
+                    name="image" 
+                    class="form-control mt-3"
 
-            >
-            <small class="text-danger"><?php echo $errors['rating']; ?></small>
-            <button type="submit" class="btn btn-primary mt-3 ms-auto">Add Product</button>
+                >
+                <small class="text-danger"><?php echo $errors['rating']; ?></small>
+                <button type="submit" class="btn btn-primary mt-3 ms-auto">Add Product</button>
 
-        </form>
-    </div>
+            </form>
+        </div>
+    <?php }elseif($adminStatus == true) {?>
+        <div class="container border bg-light p-5 shadow-sm rounded col-md-5 mt-5 my-5">
+            <form action="" method="post" enctype="multipart/form-data">
+                <?php echo $message; ?>
+                <h3 align="center">Add a Product</h3>
+                <input 
+                    type="text" 
+                    placeholder="Product Name" 
+                    name="productName" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($productName)?>"
+                >
+                <small class="text-danger"><?php echo $errors['productName']; ?></small>
+
+                <input 
+                    type="text" 
+                    placeholder="Description" 
+                    name="description" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($description)?>"
+
+                >
+                <small class="text-danger"><?php echo $errors['description']; ?></small>
+                <input 
+                    type="decimal" 
+                    placeholder="Price" 
+                    name="price" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($price)?>"
+
+                >
+                <small class="text-danger"><?php echo $errors['price']; ?></small>
+
+                <input 
+                    type="text" 
+                    placeholder="Type" 
+                    name="type" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($type)?>"
+                >
+                <small class="text-danger"><?php echo $errors['type']; ?></small>
+
+                <select 
+                    name="category" 
+                    id="" 
+                    class="form-select mt-3"
+
+                >
+                    <option value="">Select Category</option>
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                    <option value="unisex">Unisex</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="footwear">Footwear</option>
+                </select>
+                <small class="text-danger"><?php echo $errors['category']; ?></small>
+
+                <input 
+                    type="number" 
+                    placeholder="Stock Remaining" 
+                    name="stock" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($stock)?>"
+
+                >
+                <small class="text-danger"><?php echo $errors['stock']; ?></small>
+
+                <input 
+                    type="decimal" 
+                    placeholder="Rating" 
+                    name="rating" 
+                    class="form-control mt-3" 
+                    value="<?php echo htmlspecialchars($rating)?>"
+
+                >
+                <input 
+                    type="file"
+                    name="image" 
+                    class="form-control mt-3"
+
+                >
+                <small class="text-danger"><?php echo $errors['rating']; ?></small>
+                <button type="submit" class="btn btn-primary mt-3 ms-auto">Add Product</button>
+
+            </form>
+        </div>
+    <?php }else{?>
+        <section class="container-fluid d-flex align-items-center justify-content-center" style="min-height: 60dvh; ">
+        <div class="d-flex align-items-center justify-content-center" style="min-height: 50dvh; color:#711E1E; width: 100%;">
+            <div class="container text-center">
+                <h3 class="p-3">VogueVista</h3>
+                <p class="p-3">You do not have access to this page:</p>
+                <p class="p-3">You are not an admin</p>
+            </div>
+        </div>
+    </section>
+    <?php }?>
+
+    
 
     <?php require 'footer.php';?>
     

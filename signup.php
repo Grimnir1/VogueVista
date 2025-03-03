@@ -40,7 +40,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>';
             
-        }
+        
         }elseif (empty($password)) {
             $errors = '<div class="alert text-center alert-danger alert-dismissible fade show" role="alert">
                                     Please Enter your password 
@@ -89,6 +89,7 @@
                 }
 
         };
+    };
     
 ?>
 <!DOCTYPE html>

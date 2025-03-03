@@ -23,3 +23,29 @@ footer{
 a{
     text-decoration: none;
 }
+.user-table {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.table-header {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+.user-row:hover {
+    background-color: #f1f5f9;
+}
+.admin-badge {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+}
+.search-container {
+    max-width: 300px;
+}
+.action-btn {
+    width: 36px;
+    height: 36px;
+}
+.pagination {
+    margin-bottom: 0;
+}

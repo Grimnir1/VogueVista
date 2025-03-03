@@ -30,7 +30,7 @@
         </div>
 
         <div class="row g-4">
-        <h4 class="fw-bold mb-4 ">Male fashion</h4>
+        <h4 class="fw-bold mb-4 ">Accessories</h4>
             
             <?php foreach ($products as $product) { ?>
                 <?php if ($product['category'] == 'accessories') {?>
