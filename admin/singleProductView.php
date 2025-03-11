@@ -24,18 +24,12 @@
     
     function delete() {
         require 'database.php';
-        $confirm = '<script>confirm("Are you sure you want to delete this product?")</script>';
         $id = $_GET['id'];
-        echo $confirm;
-
-        if ($confirm == false) {
-
-        }else {
-            $sql = "DELETE FROM producttable WHERE productId = $id";
-            $query = mysqli_query($conn, $sql);
-            header('Location: ../productView.php');
-            exit();
-        };
+        $sql = "DELETE FROM producttable WHERE productId = $id";
+        $query = mysqli_query($conn, $sql);
+        header('Location: ../productView.php');
+        exit();
+    
     }
 ?>
 

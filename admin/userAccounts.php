@@ -8,7 +8,9 @@
         header('Location: productView.php');
         exit();
     }
-    $sql = "SELECT * FROM users";
+    $search = $_POST['search'] ?? null;
+    $search_term = '%'. $search . '%';
+    $sql = "SELECT * FROM users WHERE firstname LIKE '$search_term' OR lastname LIKE '$search_term'";
     $query = mysqli_query($conn, $sql);
     $request = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
@@ -36,12 +38,14 @@
                 <h2 class="h4 mb-0">User Management</h2>
                 <div class="d-flex gap-3">
                     <div class="search-container">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search users...">
-                            <button class="btn btn-outline-secondary" type="button">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
+                        <form action="" method="post">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search" placeholder="Search users...">
+                                <button class="btn btn-outline-secondary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

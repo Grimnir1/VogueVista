@@ -8,6 +8,35 @@
         $query = mysqli_query($conn, $sql);
         $product = mysqli_fetch_assoc($query);
     }  
+
+    if (isset($_POST['addToCart'])) {
+        $id = $_SESSION['user'];
+    
+        if (!$id) {
+            header('Location: login.php');
+            exit();
+        }else{
+            $productId = $_POST['productId'];
+            $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
+    
+            $sql2 = "SELECT * FROM cart WHERE product_id = $productId ";
+            $query2 = mysqli_query($conn, $sql2);
+    
+    
+            if (mysqli_num_rows($query2) > 0) {
+                $sql = "UPDATE cart SET quantity = quantity + 1 WHERE product_id = $productId";
+                $query = mysqli_query($conn, $sql);
+                // echo "Product quantity updated to cart";
+            }else{
+                $sql = "INSERT INTO `cart` (`user`, `product_id`, `quantity`) VALUES ('$id', '$productId', '$quantity')";
+                $query = mysqli_query($conn, $sql);
+                // echo "Product to cart";
+            }
+            // header("Location: ");
+            // exit();
+        }
+    
+    }
 ?>
 
 <section class="py-5" style="background-color: #f8f9fa;">
@@ -80,14 +109,20 @@
                             
                         </div>
 
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-primary flex-grow-1">
-                                <i class="bi bi-cart-plus me-2"></i>Add to Cart
-                            </button>
-                            <button class="btn btn-outline-primary">
-                                <i class="bi bi-heart"></i>
-                            </button>
-                        </div>
+                        <form action="" method="post">
+                            <input type="hidden" name="productId" value="<?php echo $product['productId']; ?>">
+                            <div class="card-footer bg-white border-0 pt-0">
+                                <div class="d-flex gap-2">
+                                    <button type="submit" name="addToCart" class="btn flex-grow-1 btn-sm text-white"
+                                            style="background-color: #711E1E;">
+                                        <i class="bi bi-cart-plus me-1"></i> Add to Cart
+                                    </button>
+                                    <button class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

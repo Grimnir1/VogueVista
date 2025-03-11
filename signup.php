@@ -83,7 +83,7 @@
                     $query = mysqli_query($conn, $sql);
 
                     if ($query) {
-                        header('Location: index.php');
+                        header('Location: login.php');
                         exit();
                     }
                 }
